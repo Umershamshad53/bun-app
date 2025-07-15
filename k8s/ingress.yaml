@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: bun-app.yourdomain.com  # Change to your domain
+    - host: bun-app.786999.xyz  # Change to your domain
       http:
         paths:
           - path: /

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: bun-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: bun-app

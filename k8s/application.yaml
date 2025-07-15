@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Umershamshad53/pos-devsoul.git  # Change if needed
+    repoURL: https://github.com/Umershamshad53/bun-app.git  # Change if needed
     targetRevision: HEAD
-    path: k8s
+    path: bun-app
   destination:
     server: https://kubernetes.default.svc
     namespace: default
