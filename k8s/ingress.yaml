@@ -3,8 +3,14 @@ kind: Ingress
 metadata:
   name: bun-app
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    #nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - bun-app.786999.xyz
+    secretName: bun-app-tls
   rules:
     - host: bun-app.786999.xyz  # Change to your domain
       http:
