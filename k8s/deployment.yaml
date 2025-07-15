@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bun-app
-          image: umershamshad/bun-app:latest  # Replace with your actual tag
+          image: umershamshad/bun-app:1  # Replace with your actual tag
           ports:
             - containerPort: 3000
           env:
