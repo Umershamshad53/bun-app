@@ -22,8 +22,8 @@ pipeline {
             echo ${DOCKER_CREDENTIALS_PSW} | docker login -u ${DOCKER_CREDENTIALS_USR} --password-stdin
             docker push umershamshad/bun-app:${tag}latest
             docker push umershamshad/bun-app:${tag}${BUILD_NUMBER}
-            sed -i 's|umershamshad/bun-app:.*|umershamshad/bun-app:${tag}${BUILD_NUMBER}|' deployment.yaml
-            git add deployment.yaml
+            sed -i 's|umershamshad/bun-app:.*|umershamshad/bun-app:${tag}${BUILD_NUMBER}|' k8s/deployment.yaml
+            git add k8s/deployment.yaml
             git commit -m "Update image tag to ${tag}${BUILD_NUMBER}"
             git push origin HEAD:${BRANCH_NAME}
           """
