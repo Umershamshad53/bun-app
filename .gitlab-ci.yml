@@ -1,0 +1,40 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_IMAGE_NAME: "pos-devsoul"
+  PROJECT: "pos-devsoul"
+  MONGO_URL: "$MONGO_URL"
+  
+build_image:
+  tags:
+    - dex-replica-docker
+  stage: build
+  script:
+    - docker build -t $DOCKER_IMAGE_NAME:$CI_COMMIT_REF_NAME-latest .
+
+deploy_app:
+  stage: deploy
+  tags:
+    - dex-replica-docker
+  script:
+    - echo "Using port for branch $CI_COMMIT_REF_NAME"
+    - |
+      if [ "$CI_COMMIT_REF_NAME" = "main" ]; then
+        export APP_PORT=8086
+      elif [ "$CI_COMMIT_REF_NAME" = "development" ]; then
+        export APP_PORT=8087
+      else
+        echo "Unsupported branch: $CI_COMMIT_REF_NAME"
+        exit 1
+      fi
+    - echo "Using port $APP_PORT"
+    - wget https://raw.githubusercontent.com/DevSoul-network/scripts/main/variables.py -O variables.py
+    - python3 variables.py $PROJECT
+    - echo "EXT_PORT=$EXT_PORT" >> .env
+    - echo "BRANCH=$CI_COMMIT_REF_NAME" >> .env
+    - APP_PORT=$APP_PORT docker compose -f docker-compose.yml up -d
+  only:
+    - main
+    - development

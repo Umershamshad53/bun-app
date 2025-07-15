@@ -1,0 +1,36 @@
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit $1
+
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: npm run lint
+      exclude: 
+        - node_modules
+        - .next
+        - .next-dev
+    format:
+      run: npm run format
+      exclude: 
+        - node_modules
+        - .next
+        - .next-dev
+
+pre-push:
+  parallel: true
+  commands:
+    build:
+      run: npm run build
+      exclude: 
+        - node_modules
+        - .next
+        - .next-dev
+    test:
+      run: npm run test
+      exclude: 
+        - node_modules
+        - .next
+        - .next-dev
