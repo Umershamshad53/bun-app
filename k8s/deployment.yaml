@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bun-app
-          image: umershamshad/bun-app:3
+          image: umershamshad/bun-app:4
           ports:
             - containerPort: 3000
           env:
